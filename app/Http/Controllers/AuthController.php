@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AuthController extends Controller
 {
@@ -33,6 +35,13 @@ class AuthController extends Controller
         $username = $request->input('text_username');
         $password = $request->input('text_password');
 
+        // teste database concetion
+        try{
+            DB::connection()->getPdo();
+            echo 'Conexão OK!';
+        } catch (\PDOException $e){
+           echo 'conexão falhou: ' . $e->getMessage();
+        }
         
     }
    
